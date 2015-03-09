@@ -43,9 +43,9 @@ class Presenter(object):
     def tweet(self, status, images):
         time.sleep(10)
         template = random.choice(self.intros)
-        #medias = map(lambda i: self.upload_media(i)['media_id'], images)
-        #self.twitter.update_status(medias_id=medias,
-        #                           status=template % status)
+        medias = map(lambda i: self.upload_media(i)['media_id'], images)
+        self.twitter.update_status(medias_id=medias,
+                                   status=template % status)
         print template % status
 
     @twython
