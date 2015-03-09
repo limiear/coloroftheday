@@ -16,6 +16,6 @@ def describe(color):
                                       [0, 2, 4]))
         diffs = map(lambda c: rank(c[0], color), colors)
         color = colors[diffs.index(min(diffs))][1]
-        color = wordspliter.infer_spaces(color.lower())
-        name = 'Closest %s' % color
-    return translator.translate(name)
+        color = wordspliter.infer_spaces(color)
+        name = 'Closest to %s' % color
+    return translator.translate(name.lower()).capitalize()
