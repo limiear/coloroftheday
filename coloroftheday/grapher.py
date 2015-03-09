@@ -16,6 +16,4 @@ def draw(history, filename):
         palette = [to_rgb(color), (0x00, 0x00, 0x00)]
         w = png.Writer(len(m[0]), len(m), palette=palette, bitdepth=1)
         w.write(f, m)
-
-        pass
     return [filename]

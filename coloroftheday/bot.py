@@ -9,6 +9,7 @@ from grapher import draw
 from colordescriptor import describe
 import time
 from twitter_keys import APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET
+import random
 
 
 def twython(func):
@@ -29,6 +30,11 @@ class Presenter(object):
             OAUTH_TOKEN,
             OAUTH_TOKEN_SECRET
         )
+        self.intros = [
+            'El color del dia es %.',
+            'Hoy es recomendable utilizar un color %s.',
+            'Utilizar algo %s es lo recomendado para hoy.',
+        ]
 
     def upload_media(self, image):
         photo = open(image, 'rb')
@@ -36,7 +42,7 @@ class Presenter(object):
 
     def tweet(self, status, images):
         time.sleep(10)
-        template = "%s"
+        template = random.choice(self.intros)
         #medias = map(lambda i: self.upload_media(i)['media_id'], images)
         #self.twitter.update_status(medias_id=medias,
         #                           status=template % status)
