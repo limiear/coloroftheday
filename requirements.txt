@@ -2,3 +2,4 @@ numpy==1.8.0
 twython==3.2.0
 pyPNG==0.0.17
 translate==0.0.6
+chroma==0.2.0

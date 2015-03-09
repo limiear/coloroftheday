@@ -11,6 +11,8 @@ import time
 from twitter_keys import APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET
 import random
 from StringIO import StringIO
+import itertools
+import chroma
 
 
 def twython(func):
@@ -52,15 +54,19 @@ class Presenter(object):
         self.twitter.post('/statuses/update_with_media',
                           params={'status': template % status,
                                   'media': medias[0]})
-        print template % status
+        print template % status, len(template % status)
 
     @twython
     def coloroftheday_showcase(self, cache):
         history = ColorHistory(cache)
         color = history.get([datetime.today().date()])[0][1]
+        c = chroma.Color('#%s' % color)
         name = describe(color)
         filename = draw(history, 'coloroftheday.png')
-        self.tweet(name, filename)
+        codes_tp = "#%s; rgb: %i, %i, %i; cmyk: %.3f, %.3f, %.3f, %.3f"
+        args = [[color], list(c.rgb256), list(c.cmyk)]
+        codes = codes_tp % tuple(itertools.chain.from_iterable(args))
+        self.tweet('%s (%s)' % (name, codes), filename)
 
     def demonstrate(self):
         cache = db.open()
