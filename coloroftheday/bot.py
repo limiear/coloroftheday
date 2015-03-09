@@ -37,8 +37,9 @@ class Presenter(object):
         ]
 
     def upload_media(self, image):
-        photo = open(image, 'rb')
-        return self.twitter.upload_media(media=photo)
+        with open(image, 'rb') as photo:
+            result = self.twitter.upload_media(media=photo)
+        return result
 
     def tweet(self, status, images):
         time.sleep(10)
