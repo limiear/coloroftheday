@@ -63,7 +63,7 @@ class Presenter(object):
         c = chroma.Color('#%s' % color)
         name = describe(color)
         filename = draw(history, 'coloroftheday.png')
-        codes_tp = "#%s; rgb: %i, %i, %i; cmyk: %.3f, %.3f, %.3f, %.3f"
+        codes_tp = "#%s; rgb:%i,%i,%i; cmyk:%.3f,%.3f,%.3f,%.3f"
         args = [[color], list(c.rgb256), list(c.cmyk)]
         codes = codes_tp % tuple(itertools.chain.from_iterable(args))
         self.tweet('%s (%s)' % (name, codes), filename)
