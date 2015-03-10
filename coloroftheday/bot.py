@@ -42,15 +42,12 @@ class Presenter(object):
     def upload_media(self, image):
         with open(image, 'rb') as photo:
             result = StringIO(photo.read())
-            # result = self.twitter.upload_media(media=photo)['media_id']
         return result
 
     def tweet(self, status, images):
         time.sleep(10)
         template = random.choice(self.intros)
         medias = map(lambda i: self.upload_media(i), images)
-        # self.twitter.update_status(medias_id=medias,
-        #                            status=template % status)
         self.twitter.post('/statuses/update_with_media',
                           params={'status': template % status,
                                   'media': medias[0]})
@@ -63,8 +60,8 @@ class Presenter(object):
         c = chroma.Color('#%s' % color)
         name = describe(color)
         filename = draw(history, 'coloroftheday.png')
-        codes_tp = "#%s; rgb:%i,%i,%i; cmyk:%.f,%.f,%.f,%.f"
-        args = [[color], list(c.rgb256), map(lambda i: round(i, 3), list(c.cmyk))]
+        codes_tp = "#%s; rgb:%i,%i,%i; cmyk:%s,%s,%s,%s"
+        args = [[color], list(c.rgb256), map(lambda i: str(round(i, 3)), list(c.cmyk))]
         codes = codes_tp % tuple(itertools.chain.from_iterable(args))
         self.tweet('%s (%s)' % (name, codes), filename)
 
