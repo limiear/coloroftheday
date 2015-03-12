@@ -39,7 +39,7 @@ class Presenter(object):
         self.bets.close()
 
     def read_news(self):
-        dms = self.twitter.get_direct_messages(count=200)
+        dms = self.twitter.get_direct_messages(count=180)
         self.update_limit()
         d = lambda s: datetime.strptime(s, "%a %b %d %H:%M:%S +0000 %Y")
         s = lambda m, attr: m['sender'][attr]
@@ -58,7 +58,7 @@ class Presenter(object):
             return False
         print status, len(status)
         self.twitter.send_direct_message(user_id=user, text=status)
-        self.update_limit()
+        self.rest -= 1
         print '-'
         return True
 
