@@ -38,6 +38,9 @@ test:
 	$(SOURCE_ACTIVATE) $(PYTHON) tests
 	@ echo "[ tested       ] the system was completly tested"
 
+take_bet_run:
+	$(SOURCE_ACTIVATE) $(PYTHON) coloroftheday/bet_bot.py
+
 run:
 	$(SOURCE_ACTIVATE) $(PYTHON) coloroftheday/bot.py
 
