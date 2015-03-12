@@ -54,13 +54,12 @@ class Presenter(object):
         return map(bet, dms)
 
     def say(self, status, user):
-        if self.rest > 1:
-            print status, len(status)
-            self.twitter.send_direct_message(user_id=user, text=status)
-            self.update_limit()
-            print '-'
-        else:
+        if self.rest <= 1:
             return False
+        print status, len(status)
+        self.twitter.send_direct_message(user_id=user, text=status)
+        self.update_limit()
+        print '-'
         return True
 
     def update_bet(self, detail):
