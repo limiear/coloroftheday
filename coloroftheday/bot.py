@@ -58,8 +58,8 @@ class Presenter(object):
         params = {'status': status}
         if medias:
             params['media'] = medias[0]
-        self.twitter.post('/statuses/update_with_media',
-                          params=params)
+        # self.twitter.post('/statuses/update_with_media',
+        #                  params=params)
         print status, len(status)
 
     @twython
@@ -69,8 +69,8 @@ class Presenter(object):
         c = chroma.Color('#%s' % self.color)
         name = describe(self.color)
         filename = draw(history, 'coloroftheday.png')
-        codes_tp = "#%s; rgb:%i,%i,%i; cmyk:%s,%s,%s,%s"
-        args = [[self.color], list(c.rgb256), map(lambda i: str(round(i, 3)),
+        codes_tp = "#%s; rgb:%i,%i,%i; cmyk:%i%%,%i%%,%i%%,%i%%"
+        args = [[self.color], list(c.rgb256), map(lambda i: round(100 * i, 0),
                                              list(c.cmyk))]
         codes = codes_tp % tuple(itertools.chain.from_iterable(args))
         template = random.choice(self.intros)
