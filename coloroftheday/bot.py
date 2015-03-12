@@ -36,13 +36,13 @@ class Presenter(object):
         self.intros = [
             'El color del dia es %s.',
             'Hoy es recomendable utilizar un color %s.',
-            'El %s es lo recomendado para hoy.',
-            'Intenta utilizar el %s.',
-            'Prueba utilizar el %s.',
-            'Disfruta del %s.',
-            'Te propongo el %s. como color del día.',
-            'Aprecia el %s. dado que es el color del día.',
-            'Disfruta del %s. dado que es el color del día.',
+            'Algo %s es lo recomendado para hoy.',
+            'Intenta utilizar algo %s.',
+            'Prueba utilizar algo %s.',
+            'Disfruta de algo %s.',
+            'Te propongo algo %s. como color del día.',
+            'Aprecia algo %s., dado que es el color del día.',
+            'Disfruta de algo %s., dado que es el color del día.',
         ]
 
     def upload_media(self, image):
