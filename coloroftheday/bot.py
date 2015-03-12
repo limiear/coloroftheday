@@ -40,9 +40,9 @@ class Presenter(object):
             'Intenta utilizar algo %s.',
             'Prueba utilizar algo %s.',
             'Disfruta de algo %s.',
-            'Te propongo algo %s. como color del día.',
-            'Aprecia algo %s., dado que es el color del día.',
-            'Disfruta de algo %s., dado que es el color del día.',
+            'Te propongo algo %s como color del día.',
+            'Aprecia algo %s, dado que es el color del día.',
+            'Disfruta de algo %s, dado que es el color del día.',
         ]
 
     def upload_media(self, image):
