@@ -20,7 +20,7 @@ def draw(history, filename):
     to_rgb = lambda c: (to(c[0:2]), to(c[2:4]), to(c[4:6]))
     w = 1
     with open(filename, 'wb') as f:
-        m = np.zeros((100,300))
+        m = np.zeros((100,200))
         m[:w, :] = 1
         m[-w:, :] = 1
         m[:, :w] = 1
