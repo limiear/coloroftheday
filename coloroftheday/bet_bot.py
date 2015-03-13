@@ -33,7 +33,8 @@ class Presenter(object):
         self.bets = shelve.open('betsoftheday')
 
     def update_limit(self):
-        self.rest = self.twitter.get_lastfunction_header('x-rate-limit-remaining')
+        self.rest = int(self.twitter.
+                        get_lastfunction_header('x-rate-limit-remaining'))
 
     def __del__(self):
         self.bets.close()
