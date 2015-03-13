@@ -18,10 +18,15 @@ def draw(history, filename):
     color = history.get([datetime.today().date()])[0][1]
     to = lambda c: int(c, 16)
     to_rgb = lambda c: (to(c[0:2]), to(c[2:4]), to(c[4:6]))
-    template = png.Reader('picker_mask.png')
-    meta = template.asDirect()
-    meta[3]['background'] = to_rgb(color)
+    w = 1
     with open(filename, 'wb') as f:
-        w = png.Writer(**meta[3])
-        w.write(f, meta[2])
+        m = np.zeros((100,300))
+        m[:w, :] = 1
+        m[-w:, :] = 1
+        m[:, :w] = 1
+        m[:, -w:] = 1
+        palette = [to_rgb(color), (0x00, 0x00, 0x00)]
+        w = png.Writer(len(m[0]), len(m), palette=palette,
+                       bitdepth=1)
+        w.write(f, m)
     return [filename]
