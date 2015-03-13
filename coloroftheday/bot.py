@@ -58,8 +58,8 @@ class Presenter(object):
         params = {'status': status}
         if medias:
             params['media'] = medias[0]
-         self.twitter.post('/statuses/update_with_media',
-                           params=params)
+        self.twitter.post('/statuses/update_with_media',
+                          params=params)
         print status, len(status)
 
     @twython
