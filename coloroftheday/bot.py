@@ -56,10 +56,12 @@ class Presenter(object):
         time.sleep(10)
         medias = map(lambda i: self.upload_media(i), images)
         params = {'status': status}
-        if medias:
+        if not images:
+            self.twitter.update_status(status=status)
+        else:
             params['media'] = medias[0]
-        self.twitter.post('/statuses/update_with_media',
-                          params=params)
+            self.twitter.post('/statuses/update_with_media',
+                              params=params)
         print status, len(status)
 
     @twython
@@ -105,7 +107,7 @@ class Presenter(object):
     def demonstrate(self):
         cache = db.open()
         self.coloroftheday_showcase(cache)
-        if datetime.now().hour < 8:
+        if datetime.now().hour <= 8:
             self.lotery_showcase(cache)
         db.close(cache)
 
