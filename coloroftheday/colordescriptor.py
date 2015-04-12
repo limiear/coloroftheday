@@ -1,10 +1,10 @@
-from translate import Translator
+from goslate import Goslate
 from colordb import colors
 import wordspliter
 
 
 colors_dict = dict(colors)
-translator = Translator(from_lang="en", to_lang="es")
+translator = Goslate()
 
 def rank_diff(color1, color2):
     diff = lambda c1, c2: abs(int(c1, 16) - int(c2, 16))
@@ -12,7 +12,7 @@ def rank_diff(color1, color2):
                                   [0, 2, 4]))
 
 def describe(color):
-    to_sp = lambda name: translator.translate(name.lower())
+    to_sp = lambda name: translator.translate(name.lower(), "es", "en")
     if color in colors_dict.keys():
         name = to_sp(colors_dict[color])
     else:
