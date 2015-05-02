@@ -18,22 +18,19 @@ You should have received a copy of the GNU General Public License along with the
 Follow Bot library. If not, see http://www.gnu.org/licenses/.
 """
 
+from coloroftheday.twitter_keys import *
 from twitter import Twitter, OAuth, TwitterHTTPError
 import os
 
 # put your tokens, keys, secrets, and Twitter handle in the following variables
-OAUTH_TOKEN = ""
-OAUTH_SECRET = ""
-CONSUMER_KEY = ""
-CONSUMER_SECRET = ""
-TWITTER_HANDLE = ""
+TWITTER_HANDLE = "elcolordeldia"
 
 # put the full path and file name of the file you want to store your "already followed"
 # list in
 ALREADY_FOLLOWED_FILE = "already-followed.csv"
 
-t = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_SECRET,
-            CONSUMER_KEY, CONSUMER_SECRET))
+t = Twitter(auth=OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET,
+            APP_KEY, APP_SECRET))
 
 
 def search_tweets(q, count=100, result_type="recent"):
@@ -145,10 +142,10 @@ def auto_follow_followers_for_user(user_screen_name, count=100):
     following = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
     followers_for_user = set(t.followers.ids(screen_name=user_screen_name)["ids"][:count]);
     do_not_follow = get_do_not_follow_list()
-    
+
     for user_id in followers_for_user:
         try:
-            if (user_id not in following and 
+            if (user_id not in following and
                 user_id not in do_not_follow):
 
                 t.friendships.create(user_id=user_id, follow=False)
@@ -224,8 +221,8 @@ def auto_mute_following():
 
     # put user IDs of people you do not want to mute here
     users_keep_unmuted = set([])
-            
-    # mute all        
+
+    # mute all
     for user_id in not_muted:
         if user_id not in users_keep_unmuted:
             t.mutes.users.create(user_id=user_id)
@@ -240,8 +237,8 @@ def auto_unmute():
 
     # put user IDs of people you want to remain muted here
     users_keep_muted = set([])
-            
-    # mute all        
+
+    # mute all
     for user_id in muted:
         if user_id not in users_keep_muted:
             t.mutes.users.destroy(user_id=user_id)
