@@ -243,3 +243,11 @@ def auto_unmute():
         if user_id not in users_keep_muted:
             t.mutes.users.destroy(user_id=user_id)
             print("unmuted %d" % (user_id))
+
+
+def strategy():
+    print "Strat"
+
+
+if __name__ == "__main__":
+    strategy()
