@@ -18,7 +18,7 @@ You should have received a copy of the GNU General Public License along with the
 Follow Bot library. If not, see http://www.gnu.org/licenses/.
 """
 
-from coloroftheday.twitter_keys import *
+from twitter_keys import *
 from twitter import Twitter, OAuth, TwitterHTTPError
 import os
 import itertools
