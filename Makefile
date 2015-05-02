@@ -24,6 +24,8 @@ bin/activate: requirements.txt
 	@ echo "[ installing   ] $(PIP) inside $(VIRTUALENV)"
 	@ ($(SOURCE_ACTIVATE) $(EASYINSTALL) pip 2>&1) >> tracking.log
 	@ echo "[ installing   ] $(PIP) requirements"
+	@ $(SOURCE_ACTIVATE) $(PIP) install --upgrade pip
+	@ $(SOURCE_ACTIVATE) $(PIP) install --upgrade distribute
 	@ $(SOURCE_ACTIVATE) $(PIP) install -e  .
 	@ $(SOURCE_ACTIVATE) $(PIP) install --default-timeout=100 -r requirements.development.txt 2>&1 | grep Downloading
 	@ touch bin/activate
@@ -43,6 +45,9 @@ take_bet_run:
 
 run:
 	$(SOURCE_ACTIVATE) $(PYTHON) coloroftheday/bot.py
+
+followers_run:
+	$(SOURCE_ACTIVATE) $(PYTHON) coloroftheday/followers_bot.py
 
 shell:
 	@ $(SOURCE_ACTIVATE) ipython
