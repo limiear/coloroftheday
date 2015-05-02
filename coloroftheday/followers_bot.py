@@ -23,6 +23,7 @@ from twitter import Twitter, OAuth, TwitterHTTPError
 import os
 import itertools
 import random
+import time
 
 # put your tokens, keys, secrets, and Twitter handle in the following variables
 TWITTER_HANDLE = "elcolordeldia"
@@ -255,8 +256,14 @@ def is_contained(s, l):
     return any(map(lambda e: s in e and s != e, l))
 
 
+def wait_and_auto_follow(count, trends):
+    print "Waiting 4 minutes..."
+    time.sleep(3 + 60)  # 30 min * 60 seconds
+    return auto_follow(t, count)
+
+
 def distribute_follows_into_trends(count, trends):
-    return map(lambda t: auto_follow(t, count=count/len(trends)), trends)
+    return map(lambda t: wait_and_auto_follow(t, count=count/len(trends)), trends)
 
 
 def save_followers(amount):
