@@ -311,20 +311,20 @@ def strategy():
     trends = set(filter(is_ascii,
                         itertools.chain(*trends)))
     hights = filter(lambda t: is_contained(t, trends), trends)
-    #trends = list(trends - set(hights))
-    #selected = map(lambda i: trends[i], random.sample(xrange(len(trends)),
-    #                                                  13 - len(hights)))
-    print "Following by high trends %i..." % int(posible_group)
-    distribute_follows_into_trends(int(posible_group), hights)
-    #print "Following by low trends %i..." % int(posible_group * 0.70)
-    #distribute_follows_into_trends(int(posible_group * 0.70), selected)
+    trends = list(trends - set(hights))
+    selected = map(lambda i: trends[i], random.sample(xrange(len(trends)),
+                                                      13 - len(hights)))
+    #print "Following by high trends %i..." % int(posible_group)
+    #distribute_follows_into_trends(int(posible_group), hights)
+    print "Following by low trends %i..." % int(posible_group)
+    distribute_follows_into_trends(int(posible_group), selected)
     auto_rt("color", count=1)
     print "Mutting followers..."
     auto_mute_following()
     t.direct_messages.new(screen_name='ecolell',
                           text='%i new followers (%i).' % (news, len(end)))
     t.direct_messages.new(screen_name='ecolell',
-                          text='HT: %s' % str(hights))
+                          text='HT: %s' % str(trends))
 
 
 if __name__ == "__main__":
