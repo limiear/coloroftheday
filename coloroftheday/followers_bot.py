@@ -290,10 +290,10 @@ def strategy():
                           text='%i new followers (%i).' % (news, len(end)))
     print "Projecting next week..."
     huge_group = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
-    huge_group = huge_group if huge_group > 1000 else 1000
     auto_unfollow_nonfollowers()
     better_group = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
-    posible_group = (len(huge_group) - len(better_group)) * 1.01
+    posible_group = len(huge_group) if len(huge_group) > 1000 else 1000
+    posible_group = (len(posible_group) - len(better_group)) * 1.01
     print "Selecting trends..."
     countries = ['Worldwide', 'Argentina', 'Brazil', 'Chile', 'Spain']
     """
