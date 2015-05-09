@@ -290,13 +290,16 @@ def strategy():
                           text='%i new followers (%i).' % (news, len(end)))
     print "Projecting next week..."
     huge_group = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
+    huge_group = huge_group if huge_group > 1000 else 1000
     auto_unfollow_nonfollowers()
     better_group = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
     posible_group = (len(huge_group) - len(better_group)) * 1.01
     print "Selecting trends..."
-    countries = ['Worldwide', 'Argentina', 'Brazil', 'Chile', 'Spain',
+    countries = ['Worldwide', 'Argentina', 'Brazil', 'Chile', 'Spain']
+    """
                  'United States', 'Venezuela', 'United Kingdom',
                  'Dominican Republic', 'Ecuador', 'Panama']
+    """
     countries = map(lambda i: countries[i],
                     random.sample(xrange(len(countries)), 3))
     places = map(lambda p: p[u'woeid'], filter(lambda p: p['name'] in countries,
@@ -308,20 +311,20 @@ def strategy():
     trends = set(filter(is_ascii,
                         itertools.chain(*trends)))
     hights = filter(lambda t: is_contained(t, trends), trends)
-    trends = list(trends - set(hights))
-    selected = map(lambda i: trends[i], random.sample(xrange(len(trends)),
-                                                      13 - len(hights)))
-    print "Following by high trends %i..." % int(posible_group * 0.30)
-    distribute_follows_into_trends(int(posible_group * 0.30), hights)
-    print "Following by low trends %i..." % int(posible_group * 0.70)
-    distribute_follows_into_trends(int(posible_group * 0.70), selected)
+    #trends = list(trends - set(hights))
+    #selected = map(lambda i: trends[i], random.sample(xrange(len(trends)),
+    #                                                  13 - len(hights)))
+    print "Following by high trends %i..." % int(posible_group)
+    distribute_follows_into_trends(int(posible_group), hights)
+    #print "Following by low trends %i..." % int(posible_group * 0.70)
+    #distribute_follows_into_trends(int(posible_group * 0.70), selected)
     auto_rt("color", count=1)
     print "Mutting followers..."
     auto_mute_following()
     t.direct_messages.new(screen_name='ecolell',
                           text='%i new followers (%i).' % (news, len(end)))
     t.direct_messages.new(screen_name='ecolell',
-                          text='See you the next week!' % (news, len(end)))
+                          text='HT: %s' % str(hights))
 
 
 if __name__ == "__main__":
