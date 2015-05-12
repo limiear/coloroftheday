@@ -256,14 +256,14 @@ def is_contained(s, l):
     return any(map(lambda e: s in e and s != e, l))
 
 
-def wait_and_auto_follow(count, trends):
-    print "Waiting 4 minutes..."
-    time.sleep(3 + 60)  # 30 min * 60 seconds
-    return auto_follow(t, count)
+def wait_and_auto_follow(count, trend):
+    print "Waiting 4 minutes for following %s trend..." % trend
+    time.sleep(3 * 60)  # 30 min * 60 seconds
+    return auto_follow(trend, count=count)
 
 
 def distribute_follows_into_trends(count, trends):
-    return map(lambda t: wait_and_auto_follow(count=count/len(trends), trends=t), trends)
+    return map(lambda t: wait_and_auto_follow(count=count/len(trends), trend=t), trends)
 
 
 def save_followers(amount):
@@ -314,13 +314,16 @@ def strategy():
     trends = list(trends - set(hights))
     selected = map(lambda i: trends[i], random.sample(xrange(len(trends)),
                                                       13 - len(hights)))
-    #print "Following by high trends %i..." % int(posible_group)
-    #distribute_follows_into_trends(int(posible_group), hights)
-    print "Following by low trends %i..." % int(posible_group)
-    distribute_follows_into_trends(int(posible_group), selected)
-    auto_rt("color", count=1)
-    print "Mutting followers..."
-    auto_mute_following()
+    try:
+        #print "Following by high trends %i..." % int(posible_group)
+        #distribute_follows_into_trends(int(posible_group), hights)
+        print "Following by low trends %i..." % int(posible_group)
+        distribute_follows_into_trends(int(posible_group), selected)
+        auto_rt("color", count=1)
+        print "Mutting followers..."
+        auto_mute_following()
+    except Exception:
+	pass
     t.direct_messages.new(screen_name='ecolell',
                           text='%i new followers (%i).' % (news, len(end)))
     t.direct_messages.new(screen_name='ecolell',
