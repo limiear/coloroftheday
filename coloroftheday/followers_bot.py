@@ -131,10 +131,10 @@ def auto_follow(q, count=100, result_type="recent"):
                 print("followed %s" % (tweet["user"]["screen_name"]))
 
         except TwitterHTTPError as e:
-            print("error: %s" % (str(e)))
-
-            # quit on error unless it's because someone blocked me
-            if "blocked" not in str(e).lower():
+            err = str(e).lower()
+            print("error: %s" % err)
+            if "must be age screened" not in err and "blocked" not in err:
+                # quit on error unless it's because someone blocked me
                 quit()
 
 
