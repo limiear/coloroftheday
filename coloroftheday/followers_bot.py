@@ -293,7 +293,8 @@ def strategy():
     auto_unfollow_nonfollowers()
     better_group = set(t.friends.ids(screen_name=TWITTER_HANDLE)["ids"])
     posible_group = len(huge_group) if len(huge_group) > 1000 else 1000
-    posible_group = (posible_group - len(better_group)) * 1.20
+    posible_group *= 1.20
+    posible_group -= len(better_group)
     print "Selecting trends..."
     countries = ['Worldwide', 'Argentina', 'Brazil', 'Chile', 'Spain']
     """
