@@ -296,7 +296,7 @@ def strategy():
     posible_group *= 1.20
     posible_group -= len(better_group)
     print "Selecting trends..."
-    countries = ['Worldwide', 'Argentina', 'Brazil', 'Chile', 'Spain']
+    countries = ['Worldwide', 'Argentina', 'United Kingdom', 'Chile', 'Spain']
     """
                  'United States', 'Venezuela', 'United Kingdom',
                  'Dominican Republic', 'Ecuador', 'Panama']
