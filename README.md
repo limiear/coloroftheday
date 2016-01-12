@@ -6,3 +6,21 @@
 [![Supported Python versions](https://pypip.in/py_versions/coloroftheday/badge.svg)](https://pypi.python.org/pypi/coloroftheday/) [![Stories in Ready](https://badge.waffle.io/limiear/coloroftheday.png?label=ready&title=Ready)](https://waffle.io/limiear/coloroftheday)
 
 This bot present to you the color of the day.
+
+
+Requirements
+------------
+
+If you want to use this bot on any GNU/Linux or OSX system you just need to execute of if you want to improve this library, you should download the [github repository](https://github.com/gersolar/noaaclass) and execute:
+
+    $ make virtualenv deploy
+
+Under ubuntu/debian you can try with:
+
+    $ make ubuntu virtualenv deploy
+
+
+About
+-----
+
+This software is developed by [LIMIEAR](http://limiear.github.io/). You can contact us to [limiear@gmail.com](mailto:limiear@gmail.com).

@@ -12,13 +12,15 @@ unattended:
 	@ (sudo ls 2>&1) >> tracking.log
 
 ubuntu:
-	@ sudo apt-get -y install zlibc libssl1.0.0 libbz2-dev libxslt1-dev libxml2-dev python-gevent python-virtualenv python-dev libfreetype6-dev libpng12-dev
+	@ sudo apt-get -y install zlibc libssl1.0.0 libbz2-dev libxslt1-dev libxml2-dev python-gevent python-virtualenv python-dev libfreetype6-dev libpng12-dev libffi-dev libjpeg-dev
 	@ echo "[ assume       ] ubuntu distribution"
+
+virtualenv:
+	@ echo "[ installing   ] $(VIRTUALENV)"
+	@ sudo $(FIRST_EASYINSTALL) virtualenv
 
 bin/activate: requirements.txt
 	@ echo "[ using        ] $(PYTHONPATH)"
-	@ echo "[ installing   ] $(VIRTUALENV)"
-	@ (sudo $(FIRST_EASYINSTALL) virtualenv 2>&1) >> tracking.log
 	@ echo "[ creating     ] $(VIRTUALENV) with no site packages"
 	@ ($(PYTHONLIBS) $(VIRTUALENV) --python=$(PYTHONPATH) --no-site-packages . 2>&1) >> tracking.log
 	@ echo "[ installing   ] $(PIP) inside $(VIRTUALENV)"
