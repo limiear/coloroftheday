@@ -124,6 +124,7 @@ class Presenter(object):
             os.makedirs(path)
         output = '{:}/{:}'.format(path, filename.split('/')[-1])
         im.save(output)
+        im.close()
         self.ratios.setdefault(ratio, []).append(output)
 
     def analyze_profile(self, profile):
@@ -142,15 +143,17 @@ class Presenter(object):
         self.scrap_followers(self.analyze_profile)
         rank = sorted(self.ratios.keys(), reverse=True)
         rank.remove(0)
-        rank = rank[:3 if len(rank) > 3 else len(rank)]
-        self.tweet("Ranking de los seguidores que poseen el"
+        rank = rank[:min(3, len(rank))]
+        self.tweet("Podio de los seguidores que poseen el"
                    " color del día en su imágen de perfil...", [])
+        medal = ["El oro", "La plata", "El bronce"]
         for r in reversed(rank):
             name = lambda f: (f.split('/')[-1]).split('.')[-2]
             names = " ".join(map(lambda f: '@' + name(f), self.ratios[r]))
-            self.tweet("%i) %s (%.1f %%)" % (rank.index(r) + 1,
-                                             names,
-                                             r), self.ratios[r])
+
+            self.tweet("%s es para %s con (%.1f %%)" % (medal[rank.index(r)],
+                                                        names,
+                                                        r), self.ratios[r])
 
     def lotery_showcase(self, cache):
         bets = shelve.open('betsoftheday')
@@ -184,7 +187,7 @@ class Presenter(object):
         self.coloroftheday_showcase(cache)
         if datetime.now().hour <= 8:
             self.lotery_showcase(cache)
-        self.we_saw_you_showcase(cache)
+            self.we_saw_you_showcase(cache)
         db.close(cache)
 
 
