@@ -3,4 +3,6 @@ twython==3.2.0
 pyPNG==0.0.17
 goslate==1.4.0
 chroma==0.2.0
-twitter==1.17.0
+populartwitterbot==0.0.3
+pillow==3.1.0
+requests==2.9.1
