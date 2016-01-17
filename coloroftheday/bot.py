@@ -142,7 +142,7 @@ class Presenter(object):
         os.system("rm -rf followers ranked")
         self.scrap_followers(self.analyze_profile)
         rank = sorted(self.ratios.keys(), reverse=True)
-        rank.remove(0)
+        rank.pop(0, None)
         rank = rank[:min(3, len(rank))]
         self.tweet("Podio de los seguidores que poseen el"
                    " color del día en su imágen de perfil...", [])
