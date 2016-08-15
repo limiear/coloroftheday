@@ -142,7 +142,7 @@ class Presenter(object):
         os.system("rm -rf followers ranked")
         self.scrap_followers(self.analyze_profile)
         rank = sorted(self.ratios.keys(), reverse=True)
-        rank.pop(0, None)
+        rank.pop(0)
         rank = rank[:min(3, len(rank))]
         self.tweet("Podio de los seguidores que poseen el"
                    " color del día en su imágen de perfil...", [])
@@ -185,8 +185,8 @@ class Presenter(object):
     def demonstrate(self):
         cache = db.open()
         self.coloroftheday_showcase(cache)
-        if datetime.now().hour <= 8:
-            self.lotery_showcase(cache)
+        if datetime.now().hour <= 10:
+            # self.lotery_showcase(cache)
             self.we_saw_you_showcase(cache)
         db.close(cache)
 

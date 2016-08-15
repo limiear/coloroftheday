@@ -12,7 +12,7 @@ unattended:
 	@ (sudo ls 2>&1) >> tracking.log
 
 ubuntu:
-	@ sudo apt-get -y install zlibc libssl1.0.0 libbz2-dev libxslt1-dev libxml2-dev python-gevent python-virtualenv python-dev libfreetype6-dev libpng12-dev libffi-dev libjpeg-dev
+	@ sudo apt-get -y install zlibc libssl1.0.0 libbz2-dev libxslt1-dev libxml2-dev python-gevent python-virtualenv python-dev libfreetype6-dev libpng12-dev libffi-dev libjpeg-dev python-setuptools python-virtualenv libjpeg8
 	@ echo "[ assume       ] ubuntu distribution"
 
 virtualenv:
